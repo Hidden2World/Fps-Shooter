@@ -23,8 +23,10 @@ namespace StarterAssets
 
 		[Space(10)]
 		[Tooltip("The height the player can jump")]
-		public float JumpHeight = 1.2f;
-		[Tooltip("The character uses its own gravity value. The engine default is -9.81f")]
+		public float JumpHeight = 20f;
+        public float HoldTime = 3f;
+		public float ExtraJump = 3f;
+        [Tooltip("The character uses its own gravity value. The engine default is -9.81f")]
 		public float Gravity = -15.0f;
 
 		[Space(10)]
@@ -202,28 +204,54 @@ namespace StarterAssets
 		{
 			if (Grounded)
 			{
-				// reset the fall timeout timer
-				_fallTimeoutDelta = FallTimeout;
+                // reset the fall timeout timer
+                _fallTimeoutDelta = FallTimeout;
 
-				// stop our velocity dropping infinitely when grounded
-				if (_verticalVelocity < 0.0f)
-				{
-					_verticalVelocity = -2f;
-				}
+                // stop our velocity dropping infinitely when grounded
+                if (_verticalVelocity < 0.0f)
+                {
+                    _verticalVelocity = -2f;
+                }
 
-				// Jump
-				if (_input.jump && _jumpTimeoutDelta <= 0.0f)
-				{
-					// the square root of H * -2 * G = how much velocity needed to reach desired height
-					_verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
-				}
+                // Jump
+                if (_input.jump && _jumpTimeoutDelta <= 0.0f)
+                {
+                    // Increment jumpHoldTime while the jump key is held down
+                    if (Input.GetKey(KeyCode.Space))
+                    {
+                        HoldTime += Time.deltaTime;
+                    }
 
-				// jump timeout
-				if (_jumpTimeoutDelta >= 0.0f)
-				{
-					_jumpTimeoutDelta -= Time.deltaTime;
-				}
-			}
+                    // If jump key is released, check how long it was held
+                    if (Input.GetKeyUp(KeyCode.Space))
+                    {
+
+						if (HoldTime <= 3.0f)
+						{
+							Debug.Log(HoldTime);
+							// Player held jump for 2 seconds or more, jump higher
+							_verticalVelocity = Mathf.Sqrt(HoldTime * -2f * Gravity + JumpHeight);
+						}
+						if (HoldTime >= 3.0f)
+						{
+                            Debug.Log($"{HoldTime} is above 3");
+                            _verticalVelocity = Mathf.Sqrt(3 * -2f * Gravity);
+                        }
+
+                        // Reset jumpHoldTime
+                        HoldTime = 0.0f;
+
+                        // Reset jump timeout
+                        _jumpTimeoutDelta = JumpTimeout;
+                    }
+                }
+
+                // jump timeout
+                if (_jumpTimeoutDelta >= 0.0f)
+                {
+                    _jumpTimeoutDelta -= Time.deltaTime;
+                }
+            }
 			else
 			{
 				// reset the jump timeout timer
