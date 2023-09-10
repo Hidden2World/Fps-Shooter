@@ -15,7 +15,7 @@ namespace StarterAssets
 		[Tooltip("Move speed of the character in m/s")]
 		public float MoveSpeed = 4.0f;
 		[Tooltip("Sprint speed of the character in m/s")]
-		public float SprintSpeed = 6.0f;
+		public float SprintSpeed = 10.0f;
 		[Tooltip("Rotation speed of the character")]
 		public float RotationSpeed = 1.0f;
 		[Tooltip("Acceleration and deceleration")]
@@ -27,6 +27,8 @@ namespace StarterAssets
 		public float JumpHeight = 20f;
 		public float HoldTime = 3f;
 		public float ExtraJump = 0f;
+        private Vector3 originalScale;
+
 		[Tooltip("The character uses its own gravity value. The engine default is -9.81f")]
 		public float Gravity = -15.0f;
 
@@ -96,6 +98,7 @@ namespace StarterAssets
 			{
 				_mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
 			}
+			originalScale = transform.localScale;
 		}
 
 		private void Start()
@@ -201,6 +204,8 @@ namespace StarterAssets
 			_controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 		}
 
+		private bool isShrinking = false;
+
 		private void JumpAndGravity()
 		{
 			if (Grounded)
@@ -208,7 +213,7 @@ namespace StarterAssets
 				
 				// reset the fall timeout timer
 				_fallTimeoutDelta = FallTimeout;
-
+				
 				// stop our velocity dropping infinitely when grounded
 				if (_verticalVelocity < 0.0f)
 				{
@@ -218,34 +223,67 @@ namespace StarterAssets
 				// Jump
 				if (_input.jump && _jumpTimeoutDelta <= 0.0f)
 				{
+					isShrinking = true;
 					// Increment jumpHoldTime while the jump key is held down
 					if (Input.GetKey(KeyCode.Space))
 					{
 						HoldTime += Time.deltaTime;
+						Debug.Log(HoldTime);
 						
+
 					}
+
+
+					if (isShrinking)
+					{
+						float shrinkFactor = 0.9996f;
+
+						transform.localScale *= shrinkFactor;
+						if (HoldTime >= 3.0f)
+						{
+							Debug.Log($"{HoldTime} is above 3");
+							_verticalVelocity = Mathf.Sqrt(3 * -2f * Gravity);
+							isShrinking = false;
+							transform.localScale = new Vector3(1, 1, 1);
+							// Reset jumpHoldTime
+							HoldTime = 0.0f;
+							ExtraJump = 0.0f;
+
+							// Reset jump timeout
+							_jumpTimeoutDelta = JumpTimeout;
+						}
+					}
+
+
+
+
 
 					// If jump key is released, check how long it was held
 					if (Input.GetKeyUp(KeyCode.Space))
 					{
 
-						if (HoldTime <= 2.0f)
+						if (HoldTime <= 3.0f)
 						{
 							Debug.Log(HoldTime);
+							
 							// Player held jump for 2 seconds or more, jump higher
 							_verticalVelocity = Mathf.Sqrt(HoldTime * -2f * Gravity + JumpHeight);
 							Debug.Log(_verticalVelocity);
+							isShrinking = false;
+							transform.localScale = new Vector3(1, 1, 1);
 						}
 						if (HoldTime >= 2.0f)
 						{
 							Debug.Log($"{HoldTime} is above 3");
 							_verticalVelocity = Mathf.Sqrt(3 * -2f * Gravity);
+							isShrinking = false;
+							transform.localScale = new Vector3(1,1,1);
 						}
 
 						// Reset jumpHoldTime
 						HoldTime = 0.0f;
 						ExtraJump = 0.0f;
-
+						
 						// Reset jump timeout
 						_jumpTimeoutDelta = JumpTimeout;
 					}
@@ -261,7 +299,7 @@ namespace StarterAssets
 			{
 				// reset the jump timeout timer
 				_jumpTimeoutDelta = JumpTimeout;
-
+				
 				// fall timeout
 				if (_fallTimeoutDelta >= 0.0f)
 				{
