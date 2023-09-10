@@ -44,7 +44,7 @@
                 {
                     "name": "Fire",
                     "type": "Button",
-                    "id": "e8f801d4-3156-47ae-a93c-e29429fc8fda",
+                    "id": "ce91161d-6b01-496f-83b9-18ef42122601",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -230,11 +230,11 @@
                 },
                 {
                     "name": "",
-                    "id": "8ca8d435-690f-4c2f-b791-6d192cd119c8",
+                    "id": "a42558f9-df48-4fa2-a72b-0acf147c984a",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KeyboardMouse",
+                    "groups": "",
                     "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
