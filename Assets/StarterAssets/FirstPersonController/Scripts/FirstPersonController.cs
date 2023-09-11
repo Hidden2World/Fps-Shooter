@@ -242,7 +242,7 @@ namespace StarterAssets
 						if (HoldTime >= 3.0f)
 						{
 							Debug.Log($"{HoldTime} is above 3");
-							_verticalVelocity = Mathf.Sqrt(3 * -2f * Gravity);
+							_verticalVelocity = Mathf.Sqrt(6 * -2f * Gravity);
 							isShrinking = false;
 							transform.localScale = new Vector3(1, 1, 1);
 							// Reset jumpHoldTime
@@ -267,18 +267,22 @@ namespace StarterAssets
 							Debug.Log(HoldTime);
 							
 							// Player held jump for 2 seconds or more, jump higher
-							_verticalVelocity = Mathf.Sqrt(HoldTime * -2f * Gravity + JumpHeight);
+							_verticalVelocity = Mathf.Sqrt(HoldTime * -2f * Gravity * 4);
 							Debug.Log(_verticalVelocity);
 							isShrinking = false;
 							transform.localScale = new Vector3(1, 1, 1);
 						}
-						if (HoldTime >= 2.0f)
+						if (HoldTime <= 0.5f)
 						{
-							Debug.Log($"{HoldTime} is above 3");
-							_verticalVelocity = Mathf.Sqrt(3 * -2f * Gravity);
+							Debug.Log(HoldTime);
+
+							// Player held jump for 2 seconds or more, jump higher
+							_verticalVelocity = Mathf.Sqrt(HoldTime * -2f * Gravity * 15);
+							Debug.Log(_verticalVelocity);
 							isShrinking = false;
-							transform.localScale = new Vector3(1,1,1);
+							transform.localScale = new Vector3(1, 1, 1);
 						}
+
 
 						// Reset jumpHoldTime
 						HoldTime = 0.0f;
