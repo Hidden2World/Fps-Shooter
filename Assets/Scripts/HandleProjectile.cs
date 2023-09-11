@@ -8,6 +8,12 @@ public class HandleProjectile : MonoBehaviour
     public float projectileLife;
     private float timer;
 
+
+    public GameObject explosionPrefab;
+    public GameObject deadexplosionPrefab;
+
+
+
     public int damage;
 
 
@@ -15,6 +21,7 @@ public class HandleProjectile : MonoBehaviour
     void Start()
     {
         timer = 0;
+
 
     }
 
@@ -24,13 +31,38 @@ public class HandleProjectile : MonoBehaviour
         timer += Time.deltaTime;
         if (timer >= projectileLife)
         {
+            
+
             Destroy(gameObject);
         }
 
     }
-     private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
-        Destroy(gameObject);
+        Rigidbody targetRigidbody = collision.gameObject.GetComponent<Rigidbody>();
+        PlayExplosionEffect();
+        if (targetRigidbody != null)
+        {
+            Dead();
+            Destroy(gameObject);
+        }
     }
 
+    private void PlayExplosionEffect()
+    {
+        // Instantiate the explosion effect at the projectile's position
+        GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+
+        // Destroy the explosion effect after its duration 
+        Destroy(explosion, explosion.GetComponent<ParticleSystem>().main.duration);
+    }
+
+    private void Dead()
+    {
+        // Instantiate the explosion effect at the projectile's position
+        GameObject explosion = Instantiate(deadexplosionPrefab, transform.position, Quaternion.identity);
+
+        // Destroy the explosion effect after its duration 
+        Destroy(explosion, explosion.GetComponent<ParticleSystem>().main.duration);
+    }
 }

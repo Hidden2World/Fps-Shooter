@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6238105810620407832}
   - component: {fileID: 8163900904996346722}
   - component: {fileID: 3019341528863441813}
+  - component: {fileID: -1080826464685089331}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Projectile
@@ -70,7 +71,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9af554f3b5002049b1bfcf397b1dc01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileLife: 10
+  projectileLife: 1
+  explosionPrefab: {fileID: 3205400624764853897, guid: 01a8d181306410242a5b9d0b3d861d60, type: 3}
+  deadexplosionPrefab: {fileID: 5976629153930315022, guid: af435adf26156684ea065afa7cb9c90e, type: 3}
   damage: 1
 --- !u!96 &8163900904996346722
 TrailRenderer:
@@ -194,6 +197,18 @@ CapsuleCollider:
   m_Height: 0.46
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: -0.08}
+--- !u!114 &-1080826464685089331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1295417711113293173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c4df63b2e4e7f94c9f03efdcb5da95b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1929866669848232646
 GameObject:
   m_ObjectHideFlags: 0

@@ -3617,7 +3617,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4299d8c96ea89d41bc162b342726081, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 3
+  fireRate: 2
   projectilePrefab: {fileID: 1295417711113293173, guid: 73e4a74db9f2a4c44885d9d695306e0d, type: 3}
   firePoint: {fileID: 1310216324295766329}
   playerTag: Player
