@@ -10,7 +10,7 @@ public class HandleProjectile : MonoBehaviour
 
 
     public GameObject explosionPrefab;
-    public GameObject deadexplosionPrefab;
+    
 
 
 
@@ -43,7 +43,7 @@ public class HandleProjectile : MonoBehaviour
         PlayExplosionEffect();
         if (targetRigidbody != null)
         {
-            Dead();
+            
             Destroy(gameObject);
         }
     }
@@ -57,12 +57,5 @@ public class HandleProjectile : MonoBehaviour
         Destroy(explosion, explosion.GetComponent<ParticleSystem>().main.duration);
     }
 
-    private void Dead()
-    {
-        // Instantiate the explosion effect at the projectile's position
-        GameObject explosion = Instantiate(deadexplosionPrefab, transform.position, Quaternion.identity);
-
-        // Destroy the explosion effect after its duration 
-        Destroy(explosion, explosion.GetComponent<ParticleSystem>().main.duration);
-    }
+    
 }

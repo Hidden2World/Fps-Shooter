@@ -11,6 +11,8 @@ namespace Health
         public int maxHealth;
         private int currentHealth;
 
+        public GameObject deadexplosionPrefab;
+
 
 
 
@@ -34,14 +36,19 @@ namespace Health
                 if (currentHealth <= 0)
                 {
                     TargetDestroy();
+                    Dead();
                 }
             }
 
         }
 
-        public void takeDamage()
+        private void Dead()
         {
+            // Instantiate the explosion effect at the projectile's position
+            GameObject explosion = Instantiate(deadexplosionPrefab, transform.position, Quaternion.identity);
 
+            // Destroy the explosion effect after its duration 
+            Destroy(explosion, explosion.GetComponent<ParticleSystem>().main.duration);
         }
 
     }
