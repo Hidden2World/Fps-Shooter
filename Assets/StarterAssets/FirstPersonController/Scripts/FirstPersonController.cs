@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 #endif
 
 namespace StarterAssets
@@ -121,6 +122,10 @@ namespace StarterAssets
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
+			if (Input.GetKeyDown(KeyCode.Escape))
+            {
+				SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+			}
 		}
 
 		private void LateUpdate()
