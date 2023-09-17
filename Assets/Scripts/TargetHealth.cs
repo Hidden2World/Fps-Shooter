@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 namespace Health
 {
@@ -9,7 +10,11 @@ namespace Health
     public class TargetHealth : MonoBehaviour
     {
         public int maxHealth;
+
+        
+
         private int currentHealth;
+        
 
         public GameObject deadexplosionPrefab;
 
@@ -35,6 +40,8 @@ namespace Health
 
                 if (currentHealth <= 0)
                 {
+                    
+                    
                     TargetDestroy();
                     Dead();
                 }

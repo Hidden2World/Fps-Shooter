@@ -2,14 +2,16 @@ using UnityEngine;
 
 public class EnemyShooting : MonoBehaviour
 {
-    public float fireRate = 1.0f;
+    public float fireRate = 0.0f;
     public GameObject projectilePrefab;
     public Transform firePoint;
     public string playerTag = "Player";
     public float projectileSpeed = 10.0f;
 
+
+    private float nextFireTime = 0.0f;
     private Transform player;
-    private float nextFireTime;
+    private bool playerInRange = false;
 
     void Start()
     {
@@ -18,16 +20,17 @@ public class EnemyShooting : MonoBehaviour
 
     void Update()
     {
-        if (player == null)
+        if (player == null || !playerInRange)
         {
-            // Player not found, stop shooting
+            // Player not found or not in range, stop shooting
             return;
         }
 
-        if (Time.time > nextFireTime)
+        // Check if enough time has passed since the last fire
+        if (Time.time >= nextFireTime)
         {
-            nextFireTime = Time.time + 1 / fireRate;
             Fire();
+            nextFireTime = Time.time + 1 / fireRate; // Set the next allowed fire time
         }
     }
 
@@ -50,17 +53,17 @@ public class EnemyShooting : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(playerTag))
+        if (other.gameObject.CompareTag(playerTag))
         {
-            nextFireTime = Time.time; // Fire immediately when player is in range
+            playerInRange = true;
         }
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag(playerTag))
+        if (other.gameObject.CompareTag(playerTag))
         {
-            nextFireTime = Time.time + 1 / fireRate; // Reset fire timer when player exits range
+            playerInRange = false;
         }
     }
 }

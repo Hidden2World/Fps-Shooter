@@ -122,9 +122,9 @@ namespace StarterAssets
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
-			if (Input.GetKeyDown(KeyCode.Escape))
+			//if (Input.GetKeyDown(KeyCode.Escape))
             {
-				SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+				//SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
 			}
 		}
 
