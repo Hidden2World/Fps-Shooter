@@ -13,6 +13,7 @@ namespace StarterAssets
 		public bool jump;
 		public bool sprint;
 		public bool fire;
+		public bool knife;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -76,9 +77,14 @@ namespace StarterAssets
         {
 			fire = newFireState;
         }
-        
-            
-        
+
+        public void KnifeInput(bool newKnifeState)
+        {
+            knife = newKnifeState;
+        }
+
+
+
 
         private void OnApplicationFocus(bool hasFocus)
 		{
