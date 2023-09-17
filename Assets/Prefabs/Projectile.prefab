@@ -73,7 +73,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileLife: 1
   explosionPrefab: {fileID: 3205400624764853897, guid: 01a8d181306410242a5b9d0b3d861d60, type: 3}
-  deadexplosionPrefab: {fileID: 5976629153930315022, guid: af435adf26156684ea065afa7cb9c90e, type: 3}
   damage: 1
 --- !u!96 &8163900904996346722
 TrailRenderer:
