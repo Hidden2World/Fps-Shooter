@@ -43,6 +43,8 @@ public class Enemy : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
     }
 
+
+
     public void TakeDamage(float damage)
     {
         if (gameObject != null)
