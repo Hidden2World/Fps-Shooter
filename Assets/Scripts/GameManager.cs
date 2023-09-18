@@ -10,11 +10,11 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public GameObject Wall;
     public TMP_Text EnemiesLeft;
-
     
 
 
-    
+
+
     public GameObject[] targets;
 
     float gameTimer;
@@ -26,8 +26,10 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+       
         gameState = GameState.Start;
         
+
 
     }
 

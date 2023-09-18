@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using UnityEngine;
 
 public class SoundController : MonoBehaviour
@@ -11,4 +12,5 @@ public class SoundController : MonoBehaviour
         // Play the sound when the game starts.
         audioSource.Play();
     }
+   
 }
