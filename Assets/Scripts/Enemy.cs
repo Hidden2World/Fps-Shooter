@@ -42,4 +42,13 @@ public class Enemy : MonoBehaviour
         Quaternion lookRotation = Quaternion.LookRotation(direction);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
     }
+
+    public void TakeDamage(float damage)
+    {
+        if (gameObject != null)
+        {
+            Debug.Log("Knife hit enemy");
+            //Destroy(gameObject);
+        }
+    }
 }
