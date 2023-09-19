@@ -83702,7 +83702,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5833397559154696561, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: RotationSpeed
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6127093646250652479, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_Mesh
