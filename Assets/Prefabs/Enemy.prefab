@@ -1708,7 +1708,7 @@ GameObject:
   - component: {fileID: 1310216325689403440}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1797,6 +1797,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  currentHealth: 0
   deadexplosionPrefab: {fileID: 5976629153930315022, guid: af435adf26156684ea065afa7cb9c90e, type: 3}
 --- !u!114 &1310216325689403442
 MonoBehaviour:
@@ -1812,6 +1813,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   rotationSpeed: 15
+  GetCurrentHealth: 50
 --- !u!114 &1310216325689403444
 MonoBehaviour:
   m_ObjectHideFlags: 0

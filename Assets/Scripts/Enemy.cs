@@ -1,3 +1,4 @@
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,8 +8,10 @@ public class Enemy : MonoBehaviour
     private NavMeshAgent navMeshAgent;
     public float rotationSpeed = 15f;
 
+    public int GetCurrentHealth = 50;
     private void Start()
     {
+
         // Get a reference to the NavMeshAgent component on the enemy
         navMeshAgent = GetComponent<NavMeshAgent>();
 
@@ -45,12 +48,23 @@ public class Enemy : MonoBehaviour
 
 
 
-    public void TakeDamage(float damage)
+
+
+
+    public void TakeDamage(int damage)
     {
+        GetCurrentHealth -= damage;
+        if (GetCurrentHealth <= 0)
+        {
+            gameObject.SetActive(false);
+        }
         if (gameObject != null)
         {
             Debug.Log("Knife hit enemy");
-            //Destroy(gameObject);
+
         }
     }
+
 }
+    
+

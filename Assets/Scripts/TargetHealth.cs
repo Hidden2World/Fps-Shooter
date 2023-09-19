@@ -13,7 +13,7 @@ namespace Health
 
         
 
-        private int currentHealth;
+        public int currentHealth;
         
 
         public GameObject deadexplosionPrefab;
