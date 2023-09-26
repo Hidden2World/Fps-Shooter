@@ -22,4 +22,10 @@ public class BackgroundMusic : MonoBehaviour
             Debug.LogError("Background music is not set up correctly!");
         }
     }
+
+    public void OnGameOver()
+    {
+
+        audioSource.Stop();
+    }
 }

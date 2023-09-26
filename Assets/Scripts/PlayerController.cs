@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public GameObject knifePrefab; // Reference to the knife prefab.
     public Transform throwPoint;   // The point from where the knife is thrown.
-    public float throwForce = 10f; // The force applied to the knife.
+    public float throwForce = 1500f; // The force applied to the knife.
 
     void Update()
     {

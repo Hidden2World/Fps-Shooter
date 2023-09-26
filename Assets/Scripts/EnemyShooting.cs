@@ -20,7 +20,7 @@ public class EnemyShooting : MonoBehaviour
 
     void Update()
     {
-        if (player == null || !playerInRange)
+        if (player == null || !playerInRange )
         {
             // Player not found or not in range, stop shooting
             return;

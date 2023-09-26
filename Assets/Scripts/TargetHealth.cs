@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
 namespace Health
 {
 
 
     public class TargetHealth : MonoBehaviour
     {
+
+        private HighScores highScores;
         public int maxHealth;
 
         
@@ -19,17 +20,26 @@ namespace Health
         public GameObject deadexplosionPrefab;
 
 
-
+        bool enemyDead;
 
         // Start is called before the first frame update
         void Start()
         {
             currentHealth = maxHealth;
+            highScores = (HighScores)FindObjectOfType(typeof(HighScores));
+            
         }
 
         private void TargetDestroy()
         {
-            gameObject.SetActive(false);
+
+            if (!enemyDead ) 
+            {
+                enemyDead = true;
+                highScores.UpdateAndSaveScore(highScores.scores.Length - 1, highScores.scores[highScores.scores.Length - 1] + 1);
+                Debug.Log("Enemy destroyed");
+                gameObject.SetActive(false);
+            }
         }
 
         public void OnCollisionEnter(Collision collision)
